@@ -1,0 +1,92 @@
+.todo__add {
+  max-width: 600px;
+  margin: 0 auto;
+  h1 {
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  h1:hover {
+    transform: scale(1.1);
+  }
+  .buttons {
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 20px;
+    button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      transition: 0.5s;
+    }
+    button:focus,
+    button:hover {
+      box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 0.5);
+    }
+    button:active {
+      background-color: black;
+      color: white;
+    }
+  }
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    input {
+      width: 100%;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-right: 20px;
+      transition: 0.4s;
+    }
+    input:focus {
+      box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 0.5);
+    }
+    img {
+      cursor: pointer;
+      outline: none;
+      transition: 0.4s;
+    }
+    img:focus,
+    img:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.fadeAnimation {
+  animation-name: fadeAnimation;
+  animation-duration: 1s;
+}
+@keyframes fadeAnimation {
+  from {
+    opacity: 0.1;
+    transform: translateY(400px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+// media//////////////////
+@media (max-width: 768px) {
+  .todo__add {
+    label {
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    .buttons {
+      margin: 0;
+      margin-top: 10px;
+      max-width: 79%;
+      justify-content: space-between;
+      button {
+        padding: 4px 15px;
+      }
+    }
+  }
+}

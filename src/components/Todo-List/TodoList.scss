@@ -1,0 +1,114 @@
+.todo__list {
+  margin-top: 40px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.todo__list_block {
+  outline: none;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  min-height: 150px;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: 0.4s;
+  padding: 20px;
+  text-align: start;
+  transition: 0.5s;
+  textarea {
+    background: none;
+    pointer-events: none;
+    width: 100%;
+    text-align: start;
+    padding: 10px;
+    padding-bottom: 10%;
+    resize: none;
+  }
+  textarea:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+  }
+}
+.todo__list_block:hover,
+.todo__list_block:focus {
+  transform: scale(1.1);
+}
+.todo__list_change {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  img {
+    margin-left: 20px;
+    transition: 0.4s;
+  }
+  img:hover {
+    transform: scale(1.2);
+  }
+}
+
+.change__block {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 2px 20px;
+  border-radius: 20px;
+  border: 2px solid rgb(64, 0, 124);
+  background-color: rgb(153, 49, 250);
+}
+
+// CSSTransition///////////////
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(20%);
+}
+.fade-enter-done {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateX(50%);
+}
+.fade-exit-active {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms, transform 500ms;
+}
+
+// media////////////////////////////////////////////////
+@media (max-width: 768px) {
+  .todo__list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .todo__list_block {
+    min-height: 120px;
+    textarea {
+      padding-top: 5px;
+      padding-left: 5px;
+      padding-bottom: 18px;
+    }
+    textarea:focus {
+      border: 1px solid black;
+    }
+  }
+  .todo__list_change {
+    bottom: 15px;
+  }
+}
+@media (max-width: 400px) {
+  .todo__list {
+    grid-template-columns: 1fr;
+  }
+}
