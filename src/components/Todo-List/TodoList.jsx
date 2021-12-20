@@ -51,7 +51,6 @@ const TodoList = () => {
                   <textarea
                     ref={(el) => (refInput.current[item.id] = el)}
                     onChange={(e) => onChangeValue(e.target.value, item.id)}
-                    type="text"
                     value={item.name}
                   />
                   <div className="todo__list_change">
