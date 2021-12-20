@@ -2,48 +2,44 @@ import './TodoList.scss';
 import pen from '../../image/pen.png';
 import selected from '../../image/selected.png';
 import deleted from '../../image/deleted.png';
-import { useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeItem, selectItem, changeValue } from '../../Actions/action';
+import { useRef } from 'react';
+import { observer } from 'mobx-react-lite';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import Todo from '../../store/Todo';
 
-const TodoList = () => {
-  const { listItems, filterItem } = useSelector((state) => state.reducer);
+const TodoList = observer(() => {
   let newFilterItem = '';
   const refInput = useRef([]);
-  const dispatch = useDispatch();
 
-  useEffect(() => {}, [listItems]);
-
-  switch (filterItem) {
+  switch (Todo.filterItem) {
     case 'All':
-      newFilterItem = listItems;
+      newFilterItem = Todo.listItems;
       break;
     case 'Completed':
-      newFilterItem = listItems.filter((item) => item.select);
+      newFilterItem = Todo.listItems.filter((item) => item.select);
       break;
     case 'Active':
-      newFilterItem = listItems.filter((item) => !item.select);
+      newFilterItem = Todo.listItems.filter((item) => !item.select);
       break;
     default:
-      newFilterItem = listItems;
+      newFilterItem = Todo.listItems;
   }
 
   function onChange(i) {
     refInput.current[i].focus();
   }
   function onSelected(i) {
-    dispatch(selectItem(i));
+    Todo.CompletedTodo(i);
   }
   function onDelete(i) {
-    dispatch(removeItem(i));
+    Todo.removeTodo(i);
   }
   function onChangeValue(value, i) {
-    dispatch(changeValue(value, i));
+    Todo.changeTodoValue(value, i);
   }
   return (
     <TransitionGroup elements="div" className="main__block todo__list">
-      {listItems.length
+      {Todo.listItems.length
         ? newFilterItem.map((item, i) => {
             return (
               <CSSTransition key={item.id} timeout={500} classNames="item fade">
@@ -56,7 +52,7 @@ const TodoList = () => {
                   />
                   <div className="todo__list_change">
                     <img onClick={() => onChange(item.id)} width="20" src={pen} alt="pen" />
-                    {filterItem !== 'Completed' ? (
+                    {Todo.filterItem !== 'Completed' ? (
                       <img
                         onClick={() => onSelected(item.id)}
                         width="20"
@@ -66,7 +62,9 @@ const TodoList = () => {
                     ) : null}
                     <img onClick={() => onDelete(item.id)} width="18" src={deleted} alt="deleted" />
                   </div>
-                  {filterItem === 'Completed' ? <span className="change__block">done</span> : null}
+                  {Todo.filterItem === 'Completed' ? (
+                    <span className="change__block">done</span>
+                  ) : null}
                 </div>
               </CSSTransition>
             );
@@ -74,6 +72,6 @@ const TodoList = () => {
         : null}
     </TransitionGroup>
   );
-};
+});
 
 export default TodoList;

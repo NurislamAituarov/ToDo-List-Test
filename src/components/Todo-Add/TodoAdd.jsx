@@ -1,14 +1,14 @@
 import './TodoAdd.scss';
 import add from '../../image/add.png';
 import { useRef, useState } from 'react';
-import { addItem, filterItem } from '../../Actions/action';
-import { useDispatch, useSelector } from 'react-redux';
+
+import Todo from '../../store/Todo';
+import { observer } from 'mobx-react-lite';
+
 let index = 0;
 
-const TodoAdd = () => {
-  const filterItemValue = useSelector((state) => state.reducer.filterItem);
+const TodoAdd = observer(() => {
   const [value, setValue] = useState('');
-  const dispatch = useDispatch();
   const [filterValue, setFilterValue] = useState(['Active', 'Completed', 'All']);
   const formRef = useRef();
 
@@ -18,23 +18,21 @@ const TodoAdd = () => {
   div.style.textAlign = 'start';
 
   function onAddItem(value) {
-    // console.log(formRef.current.children[2]);
-
     if (value) {
       const newItem = {
         id: index++,
         name: value,
         select: false,
       };
-      dispatch(addItem(newItem));
+      Todo.addTodo(newItem);
       setValue('');
     } else {
       formRef.current.appendChild(div);
     }
   }
 
-  function onFilter(item) {
-    dispatch(filterItem(item));
+  function onFilter(value) {
+    Todo.filterTodo(value);
   }
 
   return (
@@ -65,7 +63,7 @@ const TodoAdd = () => {
         {filterValue.map((item) => {
           return (
             <button
-              style={filterItemValue === item ? { color: 'white', backgroundColor: 'black' } : null}
+              style={Todo.filterItem === item ? { color: 'white', backgroundColor: 'black' } : null}
               onClick={() => onFilter(item)}
               key={item}>
               {item}
@@ -75,6 +73,6 @@ const TodoAdd = () => {
       </div>
     </div>
   );
-};
+});
 
 export default TodoAdd;
