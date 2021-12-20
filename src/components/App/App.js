@@ -1,11 +1,8 @@
 import Main from '../Main/Main';
 import './App.css';
 import { Helmet } from 'react-helmet';
-import { useEffect } from 'react';
 
 function App() {
-  useEffect(() => {}, []);
-
   return (
     <div className="App">
       <Helmet>
