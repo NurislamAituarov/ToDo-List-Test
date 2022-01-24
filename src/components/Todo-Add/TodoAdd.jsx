@@ -1,16 +1,18 @@
-import './TodoAdd.scss';
-import add from '../../image/add.png';
 import { useRef, useState } from 'react';
 import { addItem, filterItem } from '../../Actions/action';
 import { useDispatch, useSelector } from 'react-redux';
+import Plus from '../svg/Plus';
+import './TodoAdd.scss';
+
 let index = 0;
 
 const TodoAdd = () => {
   const filterItemValue = useSelector((state) => state.reducer.filterItem);
   const [value, setValue] = useState('');
-  const dispatch = useDispatch();
-  const [filterValue, setFilterValue] = useState(['Active', 'Completed', 'All']);
   const formRef = useRef();
+
+  const dispatch = useDispatch();
+  const filterValue = ['Active', 'Completed', 'All'];
 
   const div = document.createElement('div');
   div.innerHTML = 'Write the task';
@@ -18,8 +20,6 @@ const TodoAdd = () => {
   div.style.textAlign = 'start';
 
   function onAddItem(value) {
-    // console.log(formRef.current.children[2]);
-
     if (value) {
       const newItem = {
         id: index++,
@@ -58,7 +58,8 @@ const TodoAdd = () => {
             value={value}
             type="text"
           />
-          <img onClick={() => onAddItem(value)} tabIndex={0} width="50" src={add} alt="addList" />
+
+          <Plus onAddItem={onAddItem} value={value} />
         </label>
       </form>
       <div className="buttons">

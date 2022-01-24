@@ -12,7 +12,7 @@
   background-color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   min-height: 150px;
-  border: 1px solid black;
+  border: 2px solid rgba(153, 153, 153, 0.5);
   border-radius: 10px;
   transition: 0.4s;
   padding: 20px;
@@ -33,19 +33,23 @@
     border: 2px solid black;
     pointer-events: painted;
   }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    border: 2px solid rgb(117, 43, 0);
+  }
 }
-.todo__list_block:hover,
-.todo__list_block:focus {
-  transform: scale(1.1);
-}
+
 .todo__list_change {
   display: flex;
   align-items: center;
   position: absolute;
   bottom: 20px;
   right: 20px;
-  img {
-    margin-left: 20px;
+  img,
+  svg {
+    margin-left: 10px;
     transition: 0.4s;
   }
   img:hover {
@@ -58,9 +62,11 @@
   top: 10px;
   right: 10px;
   padding: 2px 20px;
-  border-radius: 20px;
-  border: 2px solid rgb(64, 0, 124);
-  background-color: rgb(153, 49, 250);
+  border-radius: 7px;
+  color: black;
+  border: 2px solid rgb(0, 124, 76);
+  background-color: rgb(49, 250, 99);
+  text-transform: uppercase;
 }
 
 // CSSTransition///////////////

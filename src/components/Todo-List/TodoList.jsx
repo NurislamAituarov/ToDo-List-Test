@@ -1,19 +1,20 @@
-import './TodoList.scss';
 import pen from '../../image/pen.png';
-import selected from '../../image/selected.png';
-import deleted from '../../image/deleted.png';
-import { useRef, useEffect } from 'react';
+
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, selectItem, changeValue } from '../../Actions/action';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+import Close from '../svg/Close';
+import Completed from '../svg/Completed';
+
+import './TodoList.scss';
 
 const TodoList = () => {
   const { listItems, filterItem } = useSelector((state) => state.reducer);
   let newFilterItem = '';
   const refInput = useRef([]);
   const dispatch = useDispatch();
-
-  useEffect(() => {}, [listItems]);
 
   switch (filterItem) {
     case 'All':
@@ -56,14 +57,9 @@ const TodoList = () => {
                   <div className="todo__list_change">
                     <img onClick={() => onChange(item.id)} width="20" src={pen} alt="pen" />
                     {filterItem !== 'Completed' ? (
-                      <img
-                        onClick={() => onSelected(item.id)}
-                        width="20"
-                        src={selected}
-                        alt="selected"
-                      />
+                      <Completed onSelected={onSelected} listItems={item} id={item.id} />
                     ) : null}
-                    <img onClick={() => onDelete(item.id)} width="18" src={deleted} alt="deleted" />
+                    <Close onDelete={onDelete} id={item.id} />
                   </div>
                   {filterItem === 'Completed' ? <span className="change__block">done</span> : null}
                 </div>
