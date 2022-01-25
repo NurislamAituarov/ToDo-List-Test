@@ -1,7 +1,7 @@
 import pen from '../../image/pen.png';
 
 import { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { removeItem, selectItem, changeValue } from '../../Actions/action';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -9,11 +9,19 @@ import Close from '../svg/Close';
 import Completed from '../svg/Completed';
 
 import './TodoList.scss';
+import { useAppSelector } from '../../Hooks/Hooks';
 
-const TodoList = () => {
-  const { listItems, filterItem } = useSelector((state) => state.reducer);
-  let newFilterItem = '';
-  const refInput = useRef([]);
+interface listItem {
+  id: number;
+  name: string;
+  select: boolean;
+}
+
+const TodoList: React.FC = () => {
+  const { listItems, filterItem } = useAppSelector((state) => state.reducer);
+  // const { listItems, filterItem } = useSelector((state: RootStateOrAny) => state.reducer);
+  let newFilterItem = null;
+  const refInput = useRef([] as any);
   const dispatch = useDispatch();
 
   switch (filterItem) {
@@ -21,31 +29,32 @@ const TodoList = () => {
       newFilterItem = listItems;
       break;
     case 'Completed':
-      newFilterItem = listItems.filter((item) => item.select);
+      newFilterItem = listItems.filter((item: listItem) => item.select);
       break;
     case 'Active':
-      newFilterItem = listItems.filter((item) => !item.select);
+      newFilterItem = listItems.filter((item: listItem) => !item.select);
       break;
     default:
       newFilterItem = listItems;
   }
 
-  function onChange(i) {
+  function onChange(i: number) {
     refInput.current[i].focus();
   }
-  function onSelected(i) {
+  function onSelected(i: number) {
     dispatch(selectItem(i));
   }
-  function onDelete(i) {
+  function onDelete(i: number) {
     dispatch(removeItem(i));
   }
-  function onChangeValue(value, i) {
+  function onChangeValue(value: string, i: number) {
     dispatch(changeValue(value, i));
   }
+
   return (
     <TransitionGroup elements="div" className="main__block todo__list">
       {listItems.length
-        ? newFilterItem.map((item, i) => {
+        ? newFilterItem.map((item: listItem) => {
             return (
               <CSSTransition key={item.id} timeout={500} classNames="item fade">
                 <div key={item.id} tabIndex={0} className="todo__list_block">

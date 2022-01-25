@@ -2,7 +2,7 @@ import TodoAdd from '../Todo-Add/TodoAdd';
 import TodoList from '../Todo-List/TodoList';
 import './Main.scss';
 
-const Main = () => {
+const Main: React.FC = () => {
   return (
     <main className="main">
       <TodoAdd />
@@ -11,4 +11,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export { Main };

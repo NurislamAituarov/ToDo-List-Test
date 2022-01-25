@@ -1,6 +1,11 @@
 import s from './svg.module.scss';
 
-export default function Close({ onDelete, id }) {
+interface CloseProps {
+  onDelete: (number: number) => void;
+  id: number;
+}
+
+export default function Close({ onDelete, id }: CloseProps) {
   return (
     <svg
       onClick={() => onDelete(id)}

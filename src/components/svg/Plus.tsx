@@ -1,6 +1,11 @@
 import s from './svg.module.scss';
 
-export default function Plus({ onAddItem, value }) {
+interface PlusProps {
+  onAddItem: (value: string) => void;
+  value: string;
+}
+
+export default function Plus({ onAddItem, value }: PlusProps) {
   return (
     <svg
       tabIndex={0}

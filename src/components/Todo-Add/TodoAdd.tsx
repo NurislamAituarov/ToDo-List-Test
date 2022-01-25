@@ -1,15 +1,18 @@
 import { useRef, useState } from 'react';
 import { addItem, filterItem } from '../../Actions/action';
-import { useDispatch, useSelector } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import Plus from '../svg/Plus';
 import './TodoAdd.scss';
+import { useAppSelector } from '../../Hooks/Hooks';
 
 let index = 0;
 
-const TodoAdd = () => {
-  const filterItemValue = useSelector((state) => state.reducer.filterItem);
+const TodoAdd: React.FC = () => {
+  const filterItemValue = useAppSelector((state) => state.reducer.filterItem);
+
+  // const filterItemValue = useSelector((state: RootStateOrAny) => state.reducer.filterItem);
   const [value, setValue] = useState('');
-  const formRef = useRef();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const dispatch = useDispatch();
   const filterValue = ['Active', 'Completed', 'All'];
@@ -19,7 +22,7 @@ const TodoAdd = () => {
   div.style.color = 'red';
   div.style.textAlign = 'start';
 
-  function onAddItem(value) {
+  function onAddItem(value: string) {
     if (value) {
       const newItem = {
         id: index++,
@@ -29,11 +32,11 @@ const TodoAdd = () => {
       dispatch(addItem(newItem));
       setValue('');
     } else {
-      formRef.current.appendChild(div);
+      formRef.current!.appendChild(div);
     }
   }
 
-  function onFilter(item) {
+  function onFilter(item: string) {
     dispatch(filterItem(item));
   }
 

@@ -1,7 +1,13 @@
 import s from './svg.module.scss';
 import cn from 'classnames';
 
-export default function Completed({ onSelected, id, listItems }) {
+interface CompletedProps {
+  onSelected: (number: number) => void;
+  id: number;
+  listItems: any;
+}
+
+export default function Completed({ onSelected, id, listItems }: CompletedProps) {
   return (
     <svg
       className={cn(s.completed, {

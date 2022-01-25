@@ -1,9 +1,20 @@
-const initialState = {
+interface StateTypes {
+  listItems: any[];
+  filterItem: string;
+}
+
+interface ActionTypes {
+  type: string;
+  payload: object | string | number;
+  value?: string;
+}
+
+const initialState: StateTypes = {
   listItems: [],
   filterItem: 'Active',
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case 'ADD_ITEM':
       return {
@@ -48,4 +59,4 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-export default reducer;
+export { reducer };
