@@ -7,47 +7,53 @@ import { observer } from 'mobx-react-lite';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Todo from '../../store/Todo';
 
-const TodoList = observer(() => {
-  let newFilterItem = '';
-  const refInput = useRef([]);
+interface listItemType {
+  id: number;
+  name: string;
+  select: boolean;
+}
+
+const TodoList: React.FC = observer(() => {
+  let newFilterItem = null;
+  const refInput = useRef([] as any);
 
   switch (Todo.filterItem) {
     case 'All':
       newFilterItem = Todo.listItems;
       break;
     case 'Completed':
-      newFilterItem = Todo.listItems.filter((item) => item.select);
+      newFilterItem = Todo.listItems.filter((item: listItemType) => item.select);
       break;
     case 'Active':
-      newFilterItem = Todo.listItems.filter((item) => !item.select);
+      newFilterItem = Todo.listItems.filter((item: listItemType) => !item.select);
       break;
     default:
       newFilterItem = Todo.listItems;
   }
 
-  function onChange(i) {
+  function onChange(i: number) {
     refInput.current[i].focus();
   }
-  function onSelected(i) {
+  function onSelected(i: number) {
     Todo.CompletedTodo(i);
   }
-  function onDelete(i) {
+  function onDelete(i: number) {
     Todo.removeTodo(i);
   }
-  function onChangeValue(value, i) {
+  function onChangeValue(value: string, i: number) {
     Todo.changeTodoValue(value, i);
   }
+
   return (
     <TransitionGroup elements="div" className="main__block todo__list">
       {Todo.listItems.length
-        ? newFilterItem.map((item, i) => {
+        ? newFilterItem.map((item: listItemType) => {
             return (
               <CSSTransition key={item.id} timeout={500} classNames="item fade">
                 <div key={item.id} tabIndex={0} className="todo__list_block">
                   <textarea
                     ref={(el) => (refInput.current[item.id] = el)}
                     onChange={(e) => onChangeValue(e.target.value, item.id)}
-                    type="text"
                     value={item.name}
                   />
                   <div className="todo__list_change">

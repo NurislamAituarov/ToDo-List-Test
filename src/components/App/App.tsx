@@ -2,7 +2,7 @@ import Main from '../Main/Main';
 import './App.css';
 import { Helmet } from 'react-helmet';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Helmet>
@@ -13,6 +13,6 @@ function App() {
       <Main />
     </div>
   );
-}
+};
 
 export default App;

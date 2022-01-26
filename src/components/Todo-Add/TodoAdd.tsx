@@ -3,23 +3,29 @@ import add from '../../image/add.png';
 import { useRef, useState } from 'react';
 
 import Todo from '../../store/Todo';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 let index = 0;
 
-const TodoAdd = observer(() => {
+interface ItemType {
+  id: number;
+  name: string;
+  select: boolean;
+}
+
+const TodoAdd: React.FC = observer(() => {
   const [value, setValue] = useState('');
-  const [filterValue, setFilterValue] = useState(['Active', 'Completed', 'All']);
-  const formRef = useRef();
+  const filterValue: Array<string> = ['Active', 'Completed', 'All'];
+  const formRef = useRef<HTMLFormElement>(null);
 
   const div = document.createElement('div');
   div.innerHTML = 'Write the task';
   div.style.color = 'red';
   div.style.textAlign = 'start';
 
-  function onAddItem(value) {
+  const onAddItem = (value: string) => {
     if (value) {
-      const newItem = {
+      const newItem: ItemType = {
         id: index++,
         name: value,
         select: false,
@@ -27,11 +33,11 @@ const TodoAdd = observer(() => {
       Todo.addTodo(newItem);
       setValue('');
     } else {
-      formRef.current.appendChild(div);
+      formRef.current?.appendChild(div);
     }
-  }
+  };
 
-  function onFilter(value) {
+  function onFilter(value: string) {
     Todo.filterTodo(value);
   }
 
