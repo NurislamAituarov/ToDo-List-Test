@@ -1,5 +1,5 @@
 interface StateTypes {
-  listItems: any[];
+  listItems: Array<object>;
   filterItem: string;
 }
 
@@ -7,6 +7,12 @@ interface ActionTypes {
   type: string;
   payload: object | string | number;
   value?: string;
+}
+
+interface ItemTypes {
+  id: number;
+  name: string;
+  select: boolean;
 }
 
 const initialState: StateTypes = {
@@ -17,6 +23,7 @@ const initialState: StateTypes = {
 const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case 'ADD_ITEM':
+      console.log(action.payload);
       return {
         ...state,
         listItems: [...state.listItems, action.payload],
@@ -24,12 +31,12 @@ const reducer = (state = initialState, action: ActionTypes) => {
     case 'REMOVE_ITEM':
       return {
         ...state,
-        listItems: state.listItems.filter((item) => item.id !== action.payload),
+        listItems: state.listItems.filter((item: ItemTypes) => item.id !== action.payload),
       };
     case 'SELECT_ITEM':
       return {
         ...state,
-        listItems: state.listItems.map((item) => {
+        listItems: state.listItems.map((item: ItemTypes) => {
           if (item.id === action.payload) {
             item.select = true;
           }
@@ -42,9 +49,9 @@ const reducer = (state = initialState, action: ActionTypes) => {
         filterItem: action.payload,
       };
     case 'CHANGE_VALUE':
-      let index = state.listItems.findIndex((item) => item.id === action.payload);
+      let index = state.listItems.findIndex((item: ItemTypes) => item.id === action.payload);
       const newItem = {
-        ...state.listItems.filter((item) => item.id === action.payload)[0],
+        ...state.listItems.filter((item: ItemTypes) => item.id === action.payload)[0],
         name: action.value,
       };
       return {
