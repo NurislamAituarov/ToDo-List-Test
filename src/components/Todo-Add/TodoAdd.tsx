@@ -1,21 +1,50 @@
-import { useRef, useState } from 'react';
-import { addItem, filterItem } from '../../Actions/action';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { addItem } from '../../Actions/action';
+import { useDispatch } from 'react-redux';
 import Plus from '../svg/Plus';
 import './TodoAdd.scss';
-import { useAppSelector } from '../../Hooks/Hooks';
+import { Buttons } from '../Buttons';
+import { Filter } from '../svg/Filter';
+import { IItem } from '../types';
 
 let index = 0;
 
 const TodoAdd: React.FC = () => {
-  const filterItemValue = useAppSelector((state) => state.reducer.filterItem);
-
-  // const filterItemValue = useSelector((state: RootStateOrAny) => state.reducer.filterItem);
   const [value, setValue] = useState('');
+  const [resize, setResize] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
+  const refBlock = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
-  const filterValue = ['Active', 'Completed', 'All'];
+  // console.log('render');
+
+  useEffect(() => {
+    function onResize() {
+      if (window.innerWidth < 378) {
+        setResize(false);
+      }
+      if (window.innerWidth > 378) {
+        setResize(true);
+      }
+    }
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   function handleClose(e: any) {
+  //     if (showFilter && refBlock.current && !refBlock.current.contains(e.target)) {
+  //       // setShowFilter(false);
+  //     }
+  //   }
+  //   document.addEventListener('click', handleClose, true);
+  //   return () => {
+  //     document.removeEventListener('click', handleClose, true);
+  //   };
+  // }, []);
 
   const div = document.createElement('div');
   div.innerHTML = 'Write the task';
@@ -24,7 +53,7 @@ const TodoAdd: React.FC = () => {
 
   function onAddItem(value: string) {
     if (value) {
-      const newItem = {
+      const newItem: IItem = {
         id: index++,
         name: value,
         select: false,
@@ -36,10 +65,6 @@ const TodoAdd: React.FC = () => {
     }
   }
 
-  function onFilter(item: string) {
-    dispatch(filterItem(item));
-  }
-
   return (
     <div className="main__block todo__add">
       <form
@@ -49,7 +74,6 @@ const TodoAdd: React.FC = () => {
           e.preventDefault();
           onAddItem(value);
         }}>
-        <h1 className="fadeAnimation">Todo App</h1>
         <label>
           <input
             onChange={(e) => {
@@ -61,22 +85,17 @@ const TodoAdd: React.FC = () => {
             value={value}
             type="text"
           />
-
           <Plus onAddItem={onAddItem} value={value} />
+          {!resize && <Filter showFilter={showFilter} setShowFilter={setShowFilter} />}
         </label>
       </form>
-      <div className="buttons">
-        {filterValue.map((item) => {
-          return (
-            <button
-              style={filterItemValue === item ? { color: 'white', backgroundColor: 'black' } : null}
-              onClick={() => onFilter(item)}
-              key={item}>
-              {item}
-            </button>
-          );
-        })}
-      </div>
+      {resize && <Buttons resize={resize} setShowFilter={setShowFilter} />}
+      {showFilter && (
+        <div className="block__mobile" ref={refBlock}>
+          <h3>Sort by</h3>
+          <Buttons showFilter={showFilter} setShowFilter={setShowFilter} />
+        </div>
+      )}
     </div>
   );
 };

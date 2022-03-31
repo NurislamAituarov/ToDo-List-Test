@@ -1,18 +1,18 @@
 import s from './svg.module.scss';
 
 interface PlusProps {
-  onAddItem: (value: string) => void;
-  value: string;
+  onAddItem?: (value: string) => void;
+  value?: string;
 }
 
 export default function Plus({ onAddItem, value }: PlusProps) {
   return (
     <svg
       tabIndex={0}
-      onClick={() => onAddItem(value)}
+      onClick={() => onAddItem && value && onAddItem(value)}
       onKeyPress={(e) => {
         if (e.code === 'Enter') {
-          onAddItem(value);
+          onAddItem && value && onAddItem(value);
         }
       }}
       className={s.plus}

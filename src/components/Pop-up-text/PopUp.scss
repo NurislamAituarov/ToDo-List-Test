@@ -1,0 +1,24 @@
+.pop-up {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 170px;
+  padding: 7px 30px;
+  background-color: var(--background-pop-up);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  transition: all 5s;
+
+  img {
+    width: 20px;
+  }
+}
+
+@media (max-width: 378px) {
+  .pop-up {
+    bottom: 50px;
+  }
+}

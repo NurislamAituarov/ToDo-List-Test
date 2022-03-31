@@ -16,16 +16,19 @@
   border-radius: 10px;
   transition: 0.4s;
   padding: 20px;
+  padding-bottom: 40px;
   text-align: start;
   transition: 0.5s;
   textarea {
     background: none;
     pointer-events: none;
     width: 100%;
+    min-height: 80px;
+    max-height: 200px;
     text-align: start;
     padding: 10px;
     padding-bottom: 10%;
-    resize: none;
+    resize: vertical;
     font-size: 16px;
   }
   textarea:focus {
@@ -36,8 +39,7 @@
 
   &:hover,
   &:focus {
-    transform: scale(1.07);
-    border: 2px solid rgb(0, 0, 0);
+    box-shadow: var(--shadow);
   }
 }
 

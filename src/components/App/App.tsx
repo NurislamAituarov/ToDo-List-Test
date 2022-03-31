@@ -2,8 +2,25 @@ import { Main } from '../Main/Main';
 import './App.css';
 import { Helmet } from 'react-helmet';
 import icon from '../../image/favicon.png';
+import Header from '../Header';
+import { useAppSelector } from '../../Hooks/Hooks';
+import { PopUpText } from '../Pop-up-text';
+import { useEffect, useState } from 'react';
+
+let i = 0;
 
 const App: React.FC = () => {
+  const { listItems } = useAppSelector((state) => state.reducer);
+  const [timer, setTimer] = useState(false);
+
+  useEffect(() => {
+    if (i < listItems.length) {
+      setTimer(true);
+      setTimeout(() => setTimer(false), 700);
+      i = listItems.length;
+    }
+  }, [listItems]);
+
   return (
     <div className="App">
       <Helmet>
@@ -12,7 +29,9 @@ const App: React.FC = () => {
         <meta name="description" content="Todo List page description" />
         <link rel="icon" href={icon} type="image/png" />
       </Helmet>
+      <Header />
       <Main />
+      {timer && <PopUpText isVisible={timer} />}
     </div>
   );
 };

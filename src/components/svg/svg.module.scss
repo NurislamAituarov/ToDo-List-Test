@@ -2,6 +2,7 @@
   cursor: pointer;
   outline: none;
   transition: 0.3s;
+  fill: var(--add-button-color);
   &:hover,
   &:focus,
   &:active {
@@ -28,4 +29,9 @@
 
 .all {
   fill: green;
+}
+
+.filter {
+  cursor: pointer;
+  fill: var(--svg-color);
 }

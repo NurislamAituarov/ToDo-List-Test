@@ -1,19 +1,4 @@
-interface StateTypes {
-  listItems: Array<object>;
-  filterItem: string;
-}
-
-interface ActionTypes {
-  type: string;
-  payload: object | string | number;
-  value?: string;
-}
-
-interface ItemTypes {
-  id: number;
-  name: string;
-  select: boolean;
-}
+import { ActionTypes, ItemTypes, StateTypes } from '../components/types';
 
 const initialState: StateTypes = {
   listItems: [],
@@ -23,7 +8,6 @@ const initialState: StateTypes = {
 const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      console.log(action.payload);
       return {
         ...state,
         listItems: [...state.listItems, action.payload],

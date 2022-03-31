@@ -19,7 +19,6 @@ interface listItem {
 
 const TodoList: React.FC = () => {
   const { listItems, filterItem } = useAppSelector((state) => state.reducer);
-  // const { listItems, filterItem } = useSelector((state: RootStateOrAny) => state.reducer);
   let newFilterItem = null;
   const refInput = useRef([] as any);
   const dispatch = useDispatch();
@@ -64,7 +63,7 @@ const TodoList: React.FC = () => {
                     value={item.name}
                   />
                   <div className="todo__list_change">
-                    <img onClick={() => onChange(item.id)} width="20" src={pen} alt="pen" />
+                    <img onClick={() => onChange(item.id)} width="17" src={pen} alt="pen" />
                     {filterItem !== 'Completed' ? (
                       <Completed onSelected={onSelected} listItems={item} id={item.id} />
                     ) : null}

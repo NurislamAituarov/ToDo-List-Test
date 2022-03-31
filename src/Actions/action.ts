@@ -1,4 +1,6 @@
-export const addItem = (item: object) => ({ type: 'ADD_ITEM', payload: item });
+import { IItem } from '../components/types';
+
+export const addItem = (item: IItem) => ({ type: 'ADD_ITEM', payload: item });
 export const removeItem = (index: number) => ({ type: 'REMOVE_ITEM', payload: index });
 export const selectItem = (id: number) => ({ type: 'SELECT_ITEM', payload: id });
 export const filterItem = (value: string) => ({ type: 'FILTER_ITEM', payload: value });

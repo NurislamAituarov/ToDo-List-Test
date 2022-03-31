@@ -1,0 +1,29 @@
+.header {
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-header);
+  z-index: 10;
+  h1 {
+    cursor: pointer;
+    display: inline;
+    transition: 0.4s;
+    margin-right: 20px;
+    font-size: 25px;
+  }
+  svg {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    justify-content: space-between;
+    padding: 15px 25px;
+  }
+}
