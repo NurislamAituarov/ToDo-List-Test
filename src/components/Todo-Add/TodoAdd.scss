@@ -17,7 +17,8 @@
       transition: 0.5s;
       &:hover,
       &:focus {
-        box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 0.5);
+        // box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 0.5);
+        box-shadow:var(--shadow)
       }
       &:active {
         background-color: black;
@@ -26,16 +27,15 @@
     }
   }
   label {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
-    margin-top: 40px;
+    width: 100%;
     input {
       width: 100%;
       padding: 10px 20px;
       border-radius: 5px;
-      margin-right: 20px;
       transition: 0.4s;
       font-size: 16px;
     }
@@ -53,7 +53,14 @@
     }
   }
 }
-
+.form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  margin-top: 40px;
+  margin-bottom:5px;
+}
 .fadeAnimation {
   animation-name: fadeAnimation;
   animation-duration: 1s;
@@ -83,9 +90,12 @@
 }
 
 @media screen and (max-width: 378px) {
+  .form{
+    margin-top:10px;
+  }
   .todo__add {
     label {
-      margin-top: 10px;
+      margin-top: 0px;
       margin-bottom: 0;
     }
     .buttons {

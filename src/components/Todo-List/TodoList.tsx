@@ -1,21 +1,14 @@
-import pen from '../../image/pen.png';
-
 import { useRef } from 'react';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { removeItem, selectItem, changeValue } from '../../Actions/action';
+import { useDispatch } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './TodoList.scss';
 
+import pen from '../../image/pen.png';
+import { removeItem, selectItem, changeValue } from '../../Actions/action';
 import Close from '../svg/Close';
 import Completed from '../svg/Completed';
-
-import './TodoList.scss';
 import { useAppSelector } from '../../Hooks/Hooks';
-
-interface listItem {
-  id: number;
-  name: string;
-  select: boolean;
-}
+import { IItem } from '../types';
 
 const TodoList: React.FC = () => {
   const { listItems, filterItem } = useAppSelector((state) => state.reducer);
@@ -28,10 +21,10 @@ const TodoList: React.FC = () => {
       newFilterItem = listItems;
       break;
     case 'Completed':
-      newFilterItem = listItems.filter((item: listItem) => item.select);
+      newFilterItem = listItems.filter((item: IItem) => item.select);
       break;
     case 'Active':
-      newFilterItem = listItems.filter((item: listItem) => !item.select);
+      newFilterItem = listItems.filter((item: IItem) => !item.select);
       break;
     default:
       newFilterItem = listItems;
@@ -53,7 +46,7 @@ const TodoList: React.FC = () => {
   return (
     <TransitionGroup elements="div" className="main__block todo__list">
       {listItems.length
-        ? newFilterItem.map((item: listItem) => {
+        ? newFilterItem.map((item: IItem) => {
             return (
               <CSSTransition key={item.id} timeout={500} classNames="item fade">
                 <div key={item.id} tabIndex={0} className="todo__list_block">

@@ -14,6 +14,19 @@ interface IButtons {
 export function Buttons({ showFilter, resize, setShowFilter }: IButtons) {
   const filterItemValue = useAppSelector((state) => state.reducer.filterItem);
   const dispatch = useDispatch();
+  const refBlock = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClose(e: any) {
+      if (showFilter && refBlock.current && !refBlock.current.contains(e.target)) {
+        setShowFilter(false);
+      }
+    }
+    document.addEventListener('click', handleClose, true);
+    return () => {
+      document.removeEventListener('click', handleClose, true);
+    };
+  }, []);
 
   function onFilter(item: string) {
     dispatch(filterItem(item));
@@ -43,7 +56,8 @@ export function Buttons({ showFilter, resize, setShowFilter }: IButtons) {
       variants={variants}
       initial={'hidden'}
       animate={showFilter || resize ? 'visible' : 'hidden'}
-      className="buttons">
+      className="buttons"
+      ref={refBlock}>
       {filterValue.map((item, i) => {
         return (
           <motion.div key={i} variants={variantsChildren}>

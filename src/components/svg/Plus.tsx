@@ -7,21 +7,31 @@ interface PlusProps {
 
 export default function Plus({ onAddItem, value }: PlusProps) {
   return (
-    <svg
+    <div
+      className={s.container}
       tabIndex={0}
       onClick={() => onAddItem && value && onAddItem(value)}
       onKeyPress={(e) => {
         if (e.code === 'Enter') {
           onAddItem && value && onAddItem(value);
         }
-      }}
-      className={s.plus}
-      fill="#000000"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 50 50"
-      width="50px"
-      height="50px">
-      <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z" />
-    </svg>
+      }}>
+      <svg
+        width="20"
+        className={s.plus}
+        id="Layer_1"
+        style={{ background: '0 0 512 512' }}
+        version="1.1"
+        viewBox="0 0 512 512"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink">
+        <style type="text/css"></style>
+        <path
+          className="st0"
+          d="M381,236H276V131c0-11-9-20-20-20s-20,9-20,20v105H131c-11,0-20,9-20,20s9,20,20,20h105v105c0,11,9,20,20,20  s20-9,20-20V276h105c11,0,20-9,20-20S392,236,381,236z"
+        />
+      </svg>
+    </div>
   );
 }

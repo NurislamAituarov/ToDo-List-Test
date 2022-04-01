@@ -1,6 +1,6 @@
 import './PopUp.scss';
 import { motion } from 'framer-motion';
-import added from '../../image/added.png';
+import add from '../../image/add.png';
 
 interface IPopUpText {
   isVisible: boolean;
@@ -16,7 +16,7 @@ export function PopUpText({ isVisible }: IPopUpText) {
         scale: 0,
         rotate: 0,
       }}>
-      <img src={added} alt="added" />
+      <img src={add} alt="added" />
       <p>Todo added</p>
     </motion.div>
   );

@@ -1,3 +1,14 @@
+.container{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  padding: 5px;
+  background-color:var(--background-svg-container);
+  border-radius:3px;
+  &:active{
+    background-color:#8798aa;
+  }
+}
 .plus {
   cursor: pointer;
   outline: none;
@@ -6,13 +17,13 @@
   &:hover,
   &:focus,
   &:active {
-    fill: rgb(41, 206, 0);
-    transform: scale(1.2);
+
   }
 }
 
 .close {
   transition: 0.3s;
+  fill:var(--svg-color);
   &:hover {
     transform: scale(1.1);
     fill: red;
@@ -21,6 +32,7 @@
 
 .completed {
   transition: 0.3s;
+  fill:var(--svg-color);
   &:hover {
     transform: scale(1.1);
     fill: rgb(0, 172, 0);
