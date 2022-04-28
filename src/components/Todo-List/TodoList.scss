@@ -55,9 +55,6 @@
     margin-left: 10px;
     transition: 0.4s;
   }
-  img:hover {
-    transform: scale(1.2);
-  }
 }
 
 .change__block {
@@ -118,15 +115,16 @@
     bottom: 15px;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 414px) {
   .todo__list {
     grid-template-columns: 1fr;
+    padding: 0;
   }
-  .todo__list_block{
-    min-height:100px;
-    textarea{
-        min-height: 30px;
-        padding: 5px 10px;
+  .todo__list_block {
+    min-height: 100px;
+    textarea {
+      min-height: 30px;
+      padding: 5px 10px;
     }
   }
 }

@@ -50,7 +50,8 @@ html[data-theme='light'] {
   --svg-color: rgb(0, 0, 0);
   --background-pop-up: rgb(0, 156, 0);
   --background-svg-container: #d5dde5;
-
+  --background-color-popUp: white;
+  --color-border: #4169e1;
 }
 
 html[data-theme='dark'] {
@@ -59,8 +60,9 @@ html[data-theme='dark'] {
   --add-button-color: rgb(255, 255, 255);
   --background-color-item: none;
 
-  --shadow: 5px 5px 10px 1px rgb(0, 0, 0); 
+  --shadow: 5px 5px 10px 1px rgb(0, 0, 0);
   --svg-color: rgb(255, 255, 255);
   --background-pop-up: rgb(49, 165, 49);
   --background-svg-container: #3c3c3c;
+  --background-color-popUp: #1c1c1c;
 }

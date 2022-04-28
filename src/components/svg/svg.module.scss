@@ -1,12 +1,16 @@
-.container{
+.container {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   padding: 5px;
-  background-color:var(--background-svg-container);
-  border-radius:3px;
-  &:active{
-    background-color:#8798aa;
+  background-color: var(--background-svg-container);
+  border-radius: 3px;
+  &:active {
+    background-color: #8798aa;
+  }
+  &:hover,
+  &:focus {
+    box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 0.5);
   }
 }
 .plus {
@@ -14,16 +18,11 @@
   outline: none;
   transition: 0.3s;
   fill: var(--add-button-color);
-  &:hover,
-  &:focus,
-  &:active {
-
-  }
 }
 
 .close {
   transition: 0.3s;
-  fill:var(--svg-color);
+  fill: var(--svg-color);
   &:hover {
     transform: scale(1.1);
     fill: red;
@@ -32,7 +31,7 @@
 
 .completed {
   transition: 0.3s;
-  fill:var(--svg-color);
+  fill: var(--svg-color);
   &:hover {
     transform: scale(1.1);
     fill: rgb(0, 172, 0);
@@ -46,4 +45,12 @@
 .filter {
   cursor: pointer;
   fill: var(--svg-color);
+}
+
+.pen {
+  fill: var(--svg-color);
+  &:hover {
+    transform: scale(1.1);
+    fill: #4169e1;
+  }
 }

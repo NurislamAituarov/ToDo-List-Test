@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './TodoAdd.scss';
+import cn from 'classnames';
 
 import { addItem } from '../../Actions/action';
 import Plus from '../svg/Plus';
@@ -23,10 +24,10 @@ const TodoAdd: React.FC = () => {
 
   useEffect(() => {
     function onResize() {
-      if (window.innerWidth < 378) {
+      if (window.innerWidth <= 414) {
         setResize(false);
       }
-      if (window.innerWidth > 378) {
+      if (window.innerWidth > 414) {
         setResize(true);
       }
     }
@@ -75,12 +76,12 @@ const TodoAdd: React.FC = () => {
         {!resize && <Filter showFilter={showFilter} setShowFilter={setShowFilter} />}
       </form>
       {resize && <Buttons resize={resize} setShowFilter={setShowFilter} />}
-      {showFilter && (
-        <div className="block__mobile" ref={refBlock}>
+      {
+        <div className={cn('block__mobile', { active__popUp: showFilter })} ref={refBlock}>
           <h3>Sort by</h3>
-          <Buttons showFilter={showFilter} setShowFilter={setShowFilter} />
+          <Buttons showFilter={showFilter} setShowFilter={setShowFilter} refBlock={refBlock} />
         </div>
-      )}
+      }
     </div>
   );
 };

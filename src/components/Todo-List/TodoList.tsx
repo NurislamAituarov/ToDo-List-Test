@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './TodoList.scss';
 
-import pen from '../../image/pen.png';
+// import pen from '../svg/pen.svg';
 import { removeItem, selectItem, changeValue } from '../../Actions/action';
 import Close from '../svg/Close';
 import Completed from '../svg/Completed';
 import { useAppSelector } from '../../Hooks/Hooks';
 import { IItem } from '../types';
+import { Pen } from '../svg/Pen';
 
 const TodoList: React.FC = () => {
   const { listItems, filterItem } = useAppSelector((state) => state.reducer);
@@ -56,7 +57,7 @@ const TodoList: React.FC = () => {
                     value={item.name}
                   />
                   <div className="todo__list_change">
-                    <img onClick={() => onChange(item.id)} width="17" src={pen} alt="pen" />
+                    <Pen click={() => onChange(item.id)} />
                     {filterItem !== 'Completed' ? (
                       <Completed onSelected={onSelected} listItems={item} id={item.id} />
                     ) : null}

@@ -16,7 +16,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (i < listItems.length) {
       setTimer(true);
-      setTimeout(() => setTimer(false), 700);
+      setTimeout(() => setTimer(false), 1000);
       i = listItems.length;
     }
   }, [listItems]);
@@ -31,7 +31,7 @@ const App: React.FC = () => {
       </Helmet>
       <Header />
       <Main />
-      {timer && <PopUpText isVisible={timer} />}
+      {<PopUpText isVisible={timer} />}
     </div>
   );
 };

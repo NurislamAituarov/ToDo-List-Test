@@ -1,27 +1,32 @@
 .pop-up {
   position: absolute;
-  bottom: 150px;
+  bottom: -10px;
   left: 50%;
-  transform: translate(-50%);
-  width: 170px;
-  padding: 7px 30px;
+  transform: translate(-50%, -50%) !important ;
+  width: 250px;
+  height: 45px;
+  padding: 7px 60px;
   background-color: var(--background-pop-up);
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
-  transition: all 5s;
-  p{
-    color: white;
+  transition: all 1s;
+  font-size: 18px;
+  p {
+    color: var(--background-color-popUp);
     font-weight: 700;
   }
-  img {
-    width: 20px;
+  div {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--background-color-popUp);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-@media (max-width: 378px) {
-  .pop-up {
-    bottom: 50px;
-  }
+@media (max-width: 414px) {
 }
