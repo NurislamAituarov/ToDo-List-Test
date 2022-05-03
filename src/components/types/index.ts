@@ -5,13 +5,13 @@ export interface IItem {
 }
 
 export interface StateTypes {
-  listItems: Array<object>;
+  listItems: Array<IItem>;
   filterItem: string;
 }
 
 export interface ActionTypes {
   type: string;
-  payload: object | string | number;
+  payload: IItem | string | number | Array<IItem>;
   value?: string;
 }
 

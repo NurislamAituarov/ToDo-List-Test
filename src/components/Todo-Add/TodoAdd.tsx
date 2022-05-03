@@ -40,8 +40,10 @@ const TodoAdd: React.FC = () => {
 
   function onAddItem(value: string) {
     if (value) {
+      const date = new Date().getTime();
+
       const newItem: IItem = {
-        id: index++,
+        id: date,
         name: value,
         select: false,
       };

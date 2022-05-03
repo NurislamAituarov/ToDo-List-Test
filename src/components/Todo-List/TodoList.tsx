@@ -1,10 +1,10 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './TodoList.scss';
 
 // import pen from '../svg/pen.svg';
-import { removeItem, selectItem, changeValue } from '../../Actions/action';
+import { removeItem, selectItem, changeValue, addItemArr } from '../../Actions/action';
 import Close from '../svg/Close';
 import Completed from '../svg/Completed';
 import { useAppSelector } from '../../Hooks/Hooks';
@@ -13,22 +13,35 @@ import { Pen } from '../svg/Pen';
 
 const TodoList: React.FC = () => {
   const { listItems, filterItem } = useAppSelector((state) => state.reducer);
+  const [listItemsHome, setListItemsHome] = useState(listItems);
   let newFilterItem = null;
   const refInput = useRef([] as any);
   const dispatch = useDispatch();
 
-  switch (filterItem) {
-    case 'All':
-      newFilterItem = listItems;
-      break;
-    case 'Completed':
-      newFilterItem = listItems.filter((item: IItem) => item.select);
-      break;
-    case 'Active':
-      newFilterItem = listItems.filter((item: IItem) => !item.select);
-      break;
-    default:
-      newFilterItem = listItems;
+  useEffect(() => {
+    setListItemsHome(listItems);
+  }, [listItems]);
+
+  useEffect(() => {
+    const item =
+      localStorage.getItem('listItems') && JSON.parse(localStorage.getItem('listItems') || '');
+    item && dispatch(addItemArr([...item]));
+  }, []);
+
+  if (Array.isArray(listItemsHome)) {
+    switch (filterItem) {
+      case 'All':
+        newFilterItem = listItemsHome;
+        break;
+      case 'Completed':
+        newFilterItem = listItemsHome.filter((item: IItem) => item.select);
+        break;
+      case 'Active':
+        newFilterItem = listItemsHome.filter((item: IItem) => !item.select);
+        break;
+      default:
+        newFilterItem = listItemsHome;
+    }
   }
 
   function onChange(i: number) {
@@ -46,7 +59,7 @@ const TodoList: React.FC = () => {
 
   return (
     <TransitionGroup elements="div" className="main__block todo__list">
-      {listItems.length
+      {Array.isArray(newFilterItem) && newFilterItem.length
         ? newFilterItem.map((item: IItem) => {
             return (
               <CSSTransition key={item.id} timeout={500} classNames="item fade">

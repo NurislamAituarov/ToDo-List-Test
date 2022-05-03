@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [timer, setTimer] = useState(false);
 
   useEffect(() => {
-    if (i < listItems.length) {
+    if (Array.isArray(listItems) && i < listItems.length) {
       setTimer(true);
       setTimeout(() => setTimer(false), 1000);
       i = listItems.length;
