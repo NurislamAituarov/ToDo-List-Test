@@ -9,7 +9,6 @@ import { Buttons } from '../Buttons';
 import { Filter } from '../svg/Filter';
 import { IItem } from '../types';
 
-let index = 0;
 const div = document.createElement('div');
 div.innerHTML = 'Write the task';
 div.style.cssText = 'color:red; text-align:start; position:absolute; bottom:-30px; left:0;';
