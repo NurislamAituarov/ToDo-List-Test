@@ -31,6 +31,15 @@
     resize: vertical;
     font-size: 16px;
     color: var(--svg-color);
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: auto;
+      background-color: var(--background-color);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: red;
+      border-radius: 5px;
+    }
   }
   textarea:focus {
     background-color: rgba(255, 255, 255, 0.5);
